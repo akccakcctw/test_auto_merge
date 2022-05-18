@@ -22,7 +22,7 @@ jobs:
 
       - name: Merge with main branch
         run: |
-          git checkout -b ${{env.BRANCH_TARGET}} tmp
+          git checkout -b ${{env.BRANCH_TARGET}}
           git config pull.rebase false
           git merge ${{env.BRANCH_MAIN}}
           git push
