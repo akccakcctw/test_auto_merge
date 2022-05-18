@@ -23,6 +23,9 @@ jobs:
 
       - name: Sync branches (main -> develop)
         run: |
+          git config user.name "Automerge Bot"
+          git config user.email "bot@kkday.com"
+          git config pull.rebase false
           git fetch origin
           git switch ${{ env.BRANCH_TARGET }}
           git merge ${{env.BRANCH_MAIN}} --allow-unrelated-histories
