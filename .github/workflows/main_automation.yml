@@ -25,5 +25,7 @@ jobs:
         run: |
           git fetch origin
           git switch ${{ env.BRANCH_TARGET }}
+          git remote -v
+          echo '123'
           git merge ${{env.BRANCH_MAIN}}
-          git push
+          git push --set-upstream origin ${{ env.BRANCH_TARGET }}
