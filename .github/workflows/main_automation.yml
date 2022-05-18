@@ -20,9 +20,9 @@ jobs:
           token: ${{ secrets.ACCESS_TOKEN }}
           submodules: recursive
 
-      - name: Sync branches
-        uses: tretuna/sync-branches@1.4.0
+      - name: Sync branches (main -> develop)
+        uses: devmasx/merge-branch@1.4.0
         with:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          FROM_BRANCH: ${{ env.BRANCH_MAIN }}
-          TO_BRANCH: ${{ env.BRANCH_TARGET }}
+          github_token: ${{ secrets.ACCESS_TOKEN }}
+          from_branch: ${{ env.BRANCH_MAIN }}
+          target_branch: ${{ env.BRANCH_TARGET }}
