@@ -25,4 +25,4 @@ jobs:
           git checkout -b ${{env.BRANCH_TARGET}}
           git config pull.rebase false
           git merge ${{env.BRANCH_MAIN}}
-          git push
+          git push --set-upstream origin develop
