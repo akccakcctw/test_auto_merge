@@ -19,10 +19,10 @@ jobs:
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
           submodules: recursive
-          ref: ${{ env.BRANCH_TARGET }}
 
-      - name: Merge with main branch
-        run: |
-          git config pull.rebase false
-          git merge ${{ env.BRANCH_MAIN }}
-          git push --set-upstream origin develop
+      - name: Sync branches
+        uses: tretuna/sync-branches@1.4.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          FROM_BRANCH: ${{ env.BRANCH_MAIN }}
+          TO_BRANCH: ${{ env.BRANCH_TARGET }}
