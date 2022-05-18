@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      REPO: ${{ github.repository }}
       BRANCH_TARGET: develop
       BRANCH_MAIN: main
 
@@ -21,8 +22,8 @@ jobs:
           submodules: recursive
 
       - name: Sync branches (main -> develop)
-        uses: devmasx/merge-branch@1.4.0
-        with:
-          github_token: ${{ secrets.ACCESS_TOKEN }}
-          from_branch: ${{ env.BRANCH_MAIN }}
-          target_branch: ${{ env.BRANCH_TARGET }}
+        run: |
+          git fetch origin
+          git switch ${{ env.BRANCH_TARGET }}
+          git merge ${{env.BRANCH_MAIN}}
+          git push
