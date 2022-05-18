@@ -1,0 +1,32 @@
+name: Main Automation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    env:
+      REPO: ${{ github.repository }}
+      BRANCH_TARGET: develop
+      BRANCH_MAIN: main
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          submodules: recursive
+
+      - name: Sync branches (main -> develop)
+        run: |
+          git config user.name "Automerge Bot"
+          git config user.email "bot@kkday.com"
+          git config pull.rebase false
+          git fetch origin
+          git switch ${{ env.BRANCH_TARGET }}
+          git merge ${{env.BRANCH_MAIN}} --allow-unrelated-histories
+          git push --set-upstream origin ${{ env.BRANCH_TARGET }}
